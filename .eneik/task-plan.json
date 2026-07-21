@@ -1,0 +1,17 @@
+{
+  "slices": [
+    {
+      "title": "Add note CRUD controls to approved mockup",
+      "roleTag": "BARCAN-TAG-03",
+      "jtbd": "When interacting with the design mockup, I want to see explicit controls for creating, editing, and deleting notes, so that the design completely reflects the required note management functionality.",
+      "acceptanceCriteria": "Given the approved HTML mockup, When I view the interface, Then a Floating Action Button for creating new notes is present.\nGiven an existing note item in the mockup, When I examine its layout, Then explicit edit and delete buttons are visible.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "tocConstraintRef": "design-mockup",
+      "sixSigmaMetric": "Decrease missing UI controls for note CRUD operations from 3 to 0",
+      "hasUi": true,
+      "sourceIndex": 0
+    }
+  ]
+}
