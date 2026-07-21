@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Project Notes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-variant": "#d3e4fe",
+                    "on-primary-fixed": "#0f0069",
+                    "background": "#f8f9ff",
+                    "tertiary-fixed-dim": "#6bd8cb",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "inverse-on-surface": "#eaf1ff",
+                    "on-tertiary-fixed-variant": "#005049",
+                    "on-secondary-container": "#586377",
+                    "on-secondary": "#ffffff",
+                    "secondary": "#545f73",
+                    "secondary-fixed": "#d8e3fb",
+                    "primary-fixed": "#e2dfff",
+                    "on-tertiary-fixed": "#00201d",
+                    "on-surface": "#0b1c30",
+                    "primary-container": "#4f46e5",
+                    "secondary-container": "#d5e0f8",
+                    "tertiary-container": "#006c63",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-surface": "#213145",
+                    "tertiary-fixed": "#89f5e7",
+                    "error-container": "#ffdad6",
+                    "surface-container-low": "#eff4ff",
+                    "on-secondary-fixed": "#111c2d",
+                    "on-tertiary-container": "#81eddf",
+                    "surface-container": "#e5eeff",
+                    "surface-tint": "#4d44e3",
+                    "surface-container-highest": "#d3e4fe",
+                    "primary": "#3525cd",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "surface-bright": "#f8f9ff",
+                    "tertiary": "#00524b",
+                    "on-primary": "#ffffff",
+                    "on-surface-variant": "#464555",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "outline": "#777587",
+                    "on-background": "#0b1c30",
+                    "on-primary-container": "#dad7ff",
+                    "surface-dim": "#cbdbf5",
+                    "outline-variant": "#c7c4d8",
+                    "surface-container-high": "#dce9ff",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#c3c0ff",
+                    "surface": "#f8f9ff",
+                    "error": "#ba1a1a",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "16px",
+                    "margin-mobile": "20px",
+                    "sm": "8px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "xl": "32px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "label-sm": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #F8FAFC;
+            color: #0b1c30;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .input-focus-ring:focus {
+            box-shadow: 0 0 0 2px #3525cd22;
+        }
+        .elevation-l1 {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .elevation-l2 {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen">
+<!-- TopAppBar (From Shared Components) -->
+<header class="bg-background dark:bg-background fixed docked full-width top-0 z-50 flex items-center justify-center w-full px-margin-mobile h-14">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="edit_note">edit_note</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">Project Notes</h1>
+</div>
+</header>
+<main class="flex-grow flex flex-col justify-center px-margin-mobile pt-20 pb-32 max-w-md mx-auto w-full">
+<!-- Welcome Header -->
+<div class="mb-xl text-center">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-xs">Welcome back</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Sign in to access your digital thoughts</p>
+</div>
+<!-- Login Form -->
+<section class="space-y-md">
+<!-- Email Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="email">Email Address</label>
+<div class="relative">
+<input class="w-full h-[48px] px-md bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:outline-none focus:border-primary input-focus-ring transition-all placeholder:text-outline" id="email" placeholder="name@example.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="space-y-xs">
+<label class="font-label-sm text-label-sm text-on-surface-variant ml-1" for="password">Password</label>
+<div class="relative">
+<input class="w-full h-[48px] px-md bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-body-md focus:outline-none focus:border-primary input-focus-ring transition-all placeholder:text-outline" id="password" placeholder="••••••••" type="password"/>
+</div>
+<div class="flex justify-end">
+<a class="font-label-sm text-label-sm text-primary hover:opacity-80 transition-opacity" href="#">Forgot Password?</a>
+</div>
+</div>
+<!-- Sign In Button -->
+<button class="w-full h-[48px] bg-primary text-on-primary font-label-md text-label-md rounded-lg elevation-l1 active:scale-95 transition-transform mt-lg">
+                Sign In
+            </button>
+<!-- Divider -->
+<div class="flex items-center gap-md py-lg">
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">OR</span>
+<div class="h-[1px] flex-grow bg-outline-variant"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-md">
+<button class="flex items-center justify-center gap-sm h-[48px] border border-outline-variant rounded-lg font-label-md text-label-md bg-white hover:bg-surface-container-low transition-colors active:scale-95">
+<img alt="Google Logo" class="w-5 h-5 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDghxkM3KqjRYynFHTw7GuRDG6OCBxwuN-0VHGcg3X29iLukf2PoACCxJuZcQF9aZRtb0XlznV4ulJzheNgIyLtXghroelT_aa5qU4SFQmYorHQV_M9bAzpLoXvN_U7f-4GjX4r7do4zEhIfjY8gxXQHeQpqRn53YHxpEwVErN0P-1aHSsUiuvEHC3h9khlqqXH_HYe9ZCHufCqVfVNRXaET5zR4ehVTPVnXCQeIb0rbzgwC7buH6ACDzCQf4vT7uHqUeIS2XcysmGt"/>
+                    Google
+                </button>
+<button class="flex items-center justify-center gap-sm h-[48px] border border-outline-variant rounded-lg font-label-md text-label-md bg-white hover:bg-surface-container-low transition-colors active:scale-95">
+<span class="material-symbols-outlined text-[20px]" data-icon="apple" style="font-variation-settings: 'FILL' 1;">apps</span>
+                    Apple
+                </button>
+</div>
+</section>
+<!-- Footer Link -->
+<footer class="mt-xl text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                Don't have an account? 
+                <a class="text-primary font-label-md font-semibold hover:underline" href="#">Sign Up</a>
+</p>
+</footer>
+</main>
+<!-- BottomNavBar (Filtered for Login Destination) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-lg py-sm bg-surface dark:bg-surface-container shadow-[0_-2px_8px_rgba(0,0,0,0.04)]">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl px-4 py-1 active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="login">login</span>
+<span class="font-label-sm text-label-sm">Login</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-secondary-container dark:text-on-secondary-fixed-variant px-4 py-1 hover:bg-surface-container-high transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="person_add">person_add</span>
+<span class="font-label-sm text-label-sm">Register</span>
+</div>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button, a').forEach(elem => {
+            elem.addEventListener('mousedown', () => {
+                elem.style.transform = 'scale(0.98)';
+            });
+            elem.addEventListener('mouseup', () => {
+                elem.style.transform = 'scale(1)';
+            });
+            elem.addEventListener('mouseleave', () => {
+                elem.style.transform = 'scale(1)';
+            });
+        });
+
+        // Basic form focus visual feedback
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.previousElementSibling.classList.add('text-primary');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.previousElementSibling.classList.remove('text-primary');
+            });
+        });
+    </script>
+</body></html>
