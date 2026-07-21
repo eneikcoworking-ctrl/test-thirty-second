@@ -1,15 +1,15 @@
 {
   "slices": [
     {
-      "title": "Implement authentication endpoints within existing API contract",
+      "title": "Remove unused to_dict method from Note model",
       "roleTag": "BARCAN-TAG-02",
-      "jtbd": "When a user wants to access or manage their notes, I want to securely verify their identity and establish an authenticated session, so that notes are kept private and securely isolated per account.",
-      "acceptanceCriteria": "Given a registration request with a unique username and a password, When the request is sent, Then a new user account is successfully created.\nGiven valid credentials, When the user requests login, Then the system returns a secure session token.\nGiven an invalid or expired session token, When attempting to access notes endpoints, Then the server responds with a 401 Unauthorized error.",
-      "leanValue": "essential",
-      "kanoClass": "Must-Be",
+      "jtbd": "When maintaining the codebase, I want to remove unused dead code, so that the code remains clean, maintainable, and free of unnecessary technical debt.",
+      "acceptanceCriteria": "Given the Note model in backend/models.py, When the to_dict method is removed, Then the backend tests still pass.\nGiven the FastAPI application, When the endpoints are queried, Then the API behavior remains unchanged as serialization relies on Pydantic schemas.",
+      "leanValue": "valuable",
+      "kanoClass": "Performance",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "Backend authentication processing",
-      "sixSigmaMetric": "Reduce unauthorized access requests to protected endpoints to 0%",
+      "tocConstraintRef": "Codebase maintainability and technical debt",
+      "sixSigmaMetric": "Reduce lines of dead code by 100%",
       "hasUi": false,
       "sourceIndex": 0
     }
