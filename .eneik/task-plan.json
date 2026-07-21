@@ -1,16 +1,16 @@
 {
   "slices": [
     {
-      "title": "Add CRUD actions to mobile navigation mockup",
-      "roleTag": "BARCAN-TAG-03",
-      "jtbd": "When viewing the mobile layout, I want to see direct create, edit, and delete actions in the bottom navigation bar, so that I can easily access these operations.",
-      "acceptanceCriteria": "Given the file design/approved/20260721003552-mockup/mockup.html, When rendered in a mobile viewport, Then the bottom navigation bar includes visible buttons for create, edit, and delete actions.\nGiven the mobile navigation bar, When the search functionality is active, Then the create, edit, and delete action buttons remain accessible.",
+      "title": "Disable Flyway clean-on-validation-error in production",
+      "roleTag": "BARCAN-TAG-05",
+      "jtbd": "When configuring the application database migrations, I want to disable spring.flyway.clean-on-validation-error, so that we prevent catastrophic data loss in production environments caused by silent schema drops.",
+      "acceptanceCriteria": "Given a production environment setup, When Flyway encounters a validation error, Then it must not drop and recreate the schema.\nGiven the application configuration files, When we inspect application.properties or equivalent, Then spring.flyway.clean-on-validation-error must either be missing or set to false.",
       "leanValue": "essential",
       "kanoClass": "Must-Be",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "mobile-navigation-accessibility",
-      "sixSigmaMetric": "Increase the count of visible direct CRUD action buttons on the mobile bottom navigation bar from 0 to 3.",
-      "hasUi": true,
+      "tocConstraintRef": "production database integrity",
+      "sixSigmaMetric": "decrease risky database recreation events to 0",
+      "hasUi": false,
       "sourceIndex": 0
     }
   ]
