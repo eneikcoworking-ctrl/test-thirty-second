@@ -1,15 +1,15 @@
 {
   "slices": [
     {
-      "title": "Migrate to timezone-aware datetimes",
-      "roleTag": "BARCAN-TAG-02",
-      "jtbd": "When generating timestamps, I want to use timezone-aware datetime objects, so that we avoid discrepancies with timezone-aware clients and prevent Python 3.12 deprecation warnings.",
-      "acceptanceCriteria": "Given a backend module generates a timestamp, When the code is executed, Then it must use a timezone-aware datetime like datetime.now(timezone.utc).\nGiven the codebase is analyzed, When we search for datetime.utcnow(), Then there must be 0 occurrences.",
+      "title": "Disable Flyway clean-on-validation-error in production",
+      "roleTag": "BARCAN-TAG-05",
+      "jtbd": "When configuring the application database migrations, I want to disable spring.flyway.clean-on-validation-error, so that we prevent catastrophic data loss in production environments caused by silent schema drops.",
+      "acceptanceCriteria": "Given a production environment setup, When Flyway encounters a validation error, Then it must not drop and recreate the schema.\nGiven the application configuration files, When we inspect application.properties or equivalent, Then spring.flyway.clean-on-validation-error must either be missing or set to false.",
       "leanValue": "essential",
       "kanoClass": "Must-Be",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "backend API correctness",
-      "sixSigmaMetric": "decrease deprecated datetime.utcnow() usages to 0",
+      "tocConstraintRef": "production database integrity",
+      "sixSigmaMetric": "decrease risky database recreation events to 0",
       "hasUi": false,
       "sourceIndex": 0
     }
