@@ -1,15 +1,15 @@
 {
   "slices": [
     {
-      "title": "Add note CRUD controls to approved mockup",
+      "title": "Add action buttons to mobile bottom navigation mockup",
       "roleTag": "BARCAN-TAG-03",
-      "jtbd": "When interacting with the design mockup, I want to see explicit controls for creating, editing, and deleting notes, so that the design completely reflects the required note management functionality.",
-      "acceptanceCriteria": "Given the approved HTML mockup, When I view the interface, Then a Floating Action Button for creating new notes is present.\nGiven an existing note item in the mockup, When I examine its layout, Then explicit edit and delete buttons are visible.",
+      "jtbd": "When using the mobile view, I want to see create, edit, and delete actions in the bottom navigation, so that I can quickly modify records without relying only on search.",
+      "acceptanceCriteria": "Given the mockup at design/approved/20260721003552-mockup/mockup.html, When the mobile layout is rendered, Then the bottom navigation bar must visually include create, edit, and delete actions.\nGiven the updated mobile navigation bar, When viewed on a mobile device, Then the layout must fit all action buttons without breaking or horizontal overflow.",
       "leanValue": "essential",
-      "kanoClass": "Must-Be",
+      "kanoClass": "Performance",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "design-mockup",
-      "sixSigmaMetric": "Decrease missing UI controls for note CRUD operations from 3 to 0",
+      "tocConstraintRef": "mobile UI discoverability bottleneck",
+      "sixSigmaMetric": "reduce average clicks to reach CRUD actions from 3 to 1",
       "hasUi": true,
       "sourceIndex": 0
     }
