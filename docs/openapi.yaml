@@ -1,0 +1,258 @@
+openapi: 3.1.0
+info:
+  title: Project Notes API
+  version: 1.0.0
+  description: |
+    API Contract definition for the Project Notes feature (BARCAN-TAG-12).
+    Allows authenticated users to manage short notes (create, read, update, delete, list)
+    tied to their account.
+servers:
+  - url: /api
+    description: Relative API Base URL
+paths:
+  /notes:
+    get:
+      summary: List all notes for the authenticated user
+      description: |
+        Returns a list of notes belonging to the authenticated user.
+        The results are sorted newest-first (by updated/created timestamp).
+        Can be filtered by title search query.
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: search
+          in: query
+          required: false
+          description: Substring filter for the note title
+          schema:
+            type: string
+      responses:
+        '200':
+          description: A list of notes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Note'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      summary: Create a new note
+      description: Creates a new note for the authenticated user.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNoteRequest'
+      responses:
+        '201':
+          description: Note created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+  /notes/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        description: Unique identifier of the note
+        schema:
+          type: string
+          format: uuid
+    get:
+      summary: Get a note by ID
+      description: Retrieves a specific note by its ID for the authenticated user.
+      security:
+        - BearerAuth: []
+      responses:
+        '200':
+          description: Note retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    put:
+      summary: Update an existing note
+      description: Updates the title and/or body of a specific note by ID.
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateNoteRequest'
+      responses:
+        '200':
+          description: Note updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Note'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    delete:
+      summary: Delete a note by ID
+      description: Deletes a specific note by ID for the authenticated user.
+      security:
+        - BearerAuth: []
+      responses:
+        '204':
+          description: Note deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Authenticated requests require an Authorization header with a Bearer token.
+
+  schemas:
+    Note:
+      type: object
+      required:
+        - id
+        - title
+        - body
+        - createdAt
+        - updatedAt
+        - ownerId
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of the note
+        title:
+          type: string
+          maxLength: 100
+          description: Short title of the note
+        body:
+          type: string
+          maxLength: 5000
+          description: Content/body text of the note
+        createdAt:
+          type: string
+          format: date-time
+          description: Timestamp when the note was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Timestamp when the note was last updated
+        ownerId:
+          type: string
+          format: uuid
+          description: ID of the user who owns the note
+
+    CreateNoteRequest:
+      type: object
+      required:
+        - title
+        - body
+      properties:
+        title:
+          type: string
+          maxLength: 100
+          description: Short title of the note
+        body:
+          type: string
+          maxLength: 5000
+          description: Content/body text of the note
+
+    UpdateNoteRequest:
+      type: object
+      required:
+        - title
+        - body
+      properties:
+        title:
+          type: string
+          maxLength: 100
+          description: Short title of the note
+        body:
+          type: string
+          maxLength: 5000
+          description: Content/body text of the note
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: A machine-readable error code (e.g. UNAUTHORIZED, INVALID_INPUT)
+        message:
+          type: string
+          description: A human-readable description of the error
+
+  responses:
+    BadRequest:
+      description: Invalid request parameters or payload
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed or token is missing
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Forbidden:
+      description: User is not authorized to access this note (e.g. owned by another user)
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The specified note was not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    InternalServerError:
+      description: An unexpected error occurred on the server
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
