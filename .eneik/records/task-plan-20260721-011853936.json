@@ -1,0 +1,17 @@
+{
+  "slices": [
+    {
+      "title": "Add note management controls to mockup",
+      "roleTag": "BARCAN-TAG-03",
+      "jtbd": "When viewing the notes interface, I want to see explicit controls to create, edit, and delete notes, so that I can manage my content directly from the main view.",
+      "acceptanceCriteria": "Given I am on the main notes interface, When I want to create a new note, Then a Floating Action Button is visible.\nGiven a note in the search results, When I hover or interact with it, Then edit and delete buttons are accessible.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "tocConstraintRef": "missing CRUD controls in approved mockup",
+      "sixSigmaMetric": "reduce missing essential CRUD UI controls from 3 to 0",
+      "hasUi": true,
+      "sourceIndex": 0
+    }
+  ]
+}
