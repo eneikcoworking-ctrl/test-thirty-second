@@ -1,0 +1,56 @@
+{
+  "slices": [
+    {
+      "title": "Project Notes Data Schema",
+      "roleTag": "BARCAN-TAG-08",
+      "jtbd": "When a user manages notes, I want to persist the title, body, and timestamps securely, so that notes are reliably stored per account.",
+      "acceptanceCriteria": "Given a migration script, When it runs, Then a notes table is created with owner, title, body, and timestamp columns.\nGiven the notes table, When querying by owner, Then the database uses an index to sort by newest first efficiently.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "tocConstraintRef": "Database query performance",
+      "sixSigmaMetric": "Decrease note data retrieval latency from >100ms to <20ms using an optimized index on owner and timestamps",
+      "hasUi": false,
+      "sourceIndex": 0
+    },
+    {
+      "title": "Project Notes API Contract Definition",
+      "roleTag": "BARCAN-TAG-12",
+      "jtbd": "When frontend and backend development begins, I want a shared API specification, so that both sides can build independently without integration issues.",
+      "acceptanceCriteria": "Given the API specification file, When reviewed, Then it must contain endpoints for creating, reading, updating, and deleting notes.\nGiven the specification, When generating types, Then it must include title, body, timestamps, and owner ID fields.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "tocConstraintRef": "Cross-team API integration bottleneck",
+      "sixSigmaMetric": "Reduce integration mismatch defects from 15% to 0% by finalizing the OpenAPI contract upfront",
+      "hasUi": false,
+      "sourceIndex": 0
+    },
+    {
+      "title": "Project Notes Backend Endpoints",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When the frontend requests note operations, I want to process them according to the API contract, so that users can manage their notes securely.",
+      "acceptanceCriteria": "Given a valid user session, When requesting the notes list, Then the API returns only the user's notes sorted newest-first.\nGiven a delete request for a note, When the requester is not the owner, Then the API rejects it with a 403 status.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "complicated",
+      "tocConstraintRef": "Backend API request processing throughput",
+      "sixSigmaMetric": "Decrease API endpoint P95 latency from 200ms to <50ms for note CRUD operations",
+      "hasUi": false,
+      "sourceIndex": 0
+    },
+    {
+      "title": "Project Notes Web Interface",
+      "roleTag": "BARCAN-TAG-11",
+      "jtbd": "When I need to track project details, I want to create, edit, delete, and search my notes in a UI, so that I can manage information efficiently.",
+      "acceptanceCriteria": "Given the notes dashboard, When loaded, Then it displays notes sorted newest-first.\nGiven the notes list, When a user types in the title filter, Then the list immediately updates to show only matching notes.",
+      "leanValue": "essential",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "complicated",
+      "tocConstraintRef": "Frontend state management and rendering",
+      "sixSigmaMetric": "Decrease the time required to find a specific note from >10s to <2s using client-side filtering",
+      "hasUi": true,
+      "sourceIndex": 0
+    }
+  ]
+}
