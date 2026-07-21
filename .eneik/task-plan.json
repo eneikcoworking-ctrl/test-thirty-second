@@ -1,15 +1,15 @@
 {
   "slices": [
     {
-      "title": "Add note management controls to mockup",
+      "title": "Add note CRUD controls to existing mockup",
       "roleTag": "BARCAN-TAG-03",
-      "jtbd": "When viewing the notes interface, I want to see explicit controls to create, edit, and delete notes, so that I can manage my content directly from the main view.",
-      "acceptanceCriteria": "Given I am on the main notes interface, When I want to create a new note, Then a Floating Action Button is visible.\nGiven a note in the search results, When I hover or interact with it, Then edit and delete buttons are accessible.",
+      "jtbd": "When reviewing the note search interface, I want to see explicit controls for creating, editing, and deleting notes, so that the design accurately reflects all required user interactions.",
+      "acceptanceCriteria": "Given the mockup `design/approved/20260721003552-mockup/mockup.html`, When I open the file, Then there must be a prominent control (e.g., FAB) for creating a new note.\nGiven a rendered note item, When the interface is viewed, Then it must display edit and delete action controls.",
       "leanValue": "essential",
       "kanoClass": "Must-Be",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "missing CRUD controls in approved mockup",
-      "sixSigmaMetric": "reduce missing essential CRUD UI controls from 3 to 0",
+      "tocConstraintRef": "design-review-bottleneck",
+      "sixSigmaMetric": "Reduce missing CRUD controls in note interface mockup from 3 to 0",
       "hasUi": true,
       "sourceIndex": 0
     }
