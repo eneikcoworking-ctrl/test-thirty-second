@@ -2,7 +2,7 @@
   "verdict": "approve",
   "reason": "",
   "concerns": [
-    "The search/filter interface is fully detailed, but the mockup lacks explicit controls (such as a Floating Action Button or edit/delete buttons) for creating, editing, and deleting notes, as requested by the brief.",
-    "The bottom navigation bar and mobile view focus primarily on search, whereas direct create/edit/delete actions are not visually represented on this single screen."
+    "The mockup focuses primarily on searching notes, but does not explicitly show direct buttons or interactive controls to create, edit, or delete notes as outlined in the brief.",
+    "The bottom navigation bar has a Search tab highlighted as active, but there is no clear prominent action (such as a Floating Action Button) for adding a new note on this viewport."
   ]
 }
