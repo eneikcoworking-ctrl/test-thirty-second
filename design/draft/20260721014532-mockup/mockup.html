@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Auto Follow-up | Verifiable Progress Slice</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;family=Geist:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .verified-glow {
+            box-shadow: 0 0 20px rgba(137, 206, 255, 0.15);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b1326;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3e4850;
+            border-radius: 10px;
+        }
+    </style>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#060e20",
+                    "secondary-fixed": "#d8e3fb",
+                    "on-primary": "#00344d",
+                    "on-tertiary": "#213145",
+                    "tertiary-fixed": "#d3e4fe",
+                    "on-tertiary-fixed": "#0b1c30",
+                    "on-secondary-container": "#aeb9d0",
+                    "primary-fixed": "#c9e6ff",
+                    "on-secondary-fixed-variant": "#3c475a",
+                    "primary-container": "#0ea5e9",
+                    "secondary-container": "#3e495d",
+                    "tertiary-fixed-dim": "#b7c8e1",
+                    "tertiary-container": "#8d9db5",
+                    "inverse-on-surface": "#283044",
+                    "outline": "#88929b",
+                    "error-container": "#93000a",
+                    "on-background": "#dae2fd",
+                    "surface-container-high": "#222a3d",
+                    "on-primary-fixed-variant": "#004c6e",
+                    "surface-tint": "#89ceff",
+                    "inverse-surface": "#dae2fd",
+                    "surface-bright": "#31394d",
+                    "on-primary-container": "#003751",
+                    "background": "#0b1326",
+                    "tertiary": "#b7c8e1",
+                    "surface": "#0b1326",
+                    "on-secondary": "#263143",
+                    "inverse-primary": "#006591",
+                    "outline-variant": "#3e4850",
+                    "on-error-container": "#ffdad6",
+                    "surface-dim": "#0b1326",
+                    "on-surface": "#dae2fd",
+                    "surface-container": "#171f33",
+                    "on-surface-variant": "#bec8d2",
+                    "on-tertiary-fixed-variant": "#38485d",
+                    "secondary": "#bcc7de",
+                    "surface-variant": "#2d3449",
+                    "on-error": "#690005",
+                    "surface-container-highest": "#2d3449",
+                    "primary-fixed-dim": "#89ceff",
+                    "on-primary-fixed": "#001e2f",
+                    "secondary-fixed-dim": "#bcc7de",
+                    "on-tertiary-container": "#243449",
+                    "error": "#ffb4ab",
+                    "surface-container-low": "#131b2e",
+                    "on-secondary-fixed": "#111c2d",
+                    "primary": "#89ceff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "1.5rem",
+                    "md": "1rem",
+                    "xl": "2rem",
+                    "margin-desktop": "2.5rem",
+                    "margin-mobile": "1rem",
+                    "sm": "0.5rem",
+                    "xs": "0.25rem",
+                    "base": "4px",
+                    "lg": "1.5rem"
+            },
+            "fontFamily": {
+                    "code-md": ["JetBrains Mono"],
+                    "headline-lg": ["Geist"],
+                    "headline-sm": ["Geist"],
+                    "label-sm": ["JetBrains Mono"],
+                    "body-lg": ["Geist"],
+                    "body-md": ["Geist"],
+                    "headline-md": ["Geist"]
+            },
+            "fontSize": {
+                    "code-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- Navigation Drawer (Desktop) -->
+<aside class="hidden md:flex h-screen w-64 fixed left-0 top-0 flex-col gap-xs p-md bg-surface-container-low border-r border-outline-variant">
+<div class="mb-xl px-md">
+<span class="font-code-md text-code-md font-bold text-primary tracking-tighter">CIRCUIT_BREAK</span>
+</div>
+<nav class="flex flex-col gap-xs">
+<a class="flex items-center gap-md px-md py-sm hover:bg-surface-container-high transition-all text-on-surface-variant rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container transition-all rounded-xl" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="segment">segment</span>
+<span class="font-label-sm text-label-sm">Slices</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm hover:bg-surface-container-high transition-all text-on-surface-variant rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm">Insights</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm hover:bg-surface-container-high transition-all text-on-surface-variant rounded-xl group" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 md:ml-64 flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 bg-background flex justify-between items-center px-gutter py-md border-b border-outline-variant">
+<div class="flex items-center gap-md">
+<div class="flex items-center justify-center w-8 h-8 rounded-lg bg-surface-container-highest text-primary">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Auto Follow-up</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="hidden md:block font-label-sm text-label-sm text-on-surface-variant">System Status: Nominal</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A high-quality professional portrait of a software engineer in a dark, moody technical studio environment. The lighting is low-key with a subtle cyan rim light on the subject. The background features blurred lines of code and server rack indicators, creating a high-tech atmosphere consistent with a minimalist SaaS design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbou15c9Iu79aZXujDXBDZ21qPyCZSKFoENEXQNBA3NrdXU6ThgPr7XNvFm85aQqztgDE7EoJp0Ikw9Prv4RUx9e5420voj_mH2zCc5sQt3eBsacCWsphe_p84jwjCkU2j9frZkOZNUV09_rNTWx-yOSSAIRLK9ifcikuFJHYA8dZ1FSLsFj5WF2V0HChJ9OGZI_nWDRY30kHtWzWLOH5l-8F_jLkvGYc2WnCEnFVxDi-mtJ4vtYhGoNfj25Ot_WzEjJziKoIZts6S"/>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="p-gutter flex flex-col gap-lg max-w-5xl mx-auto w-full pb-24 md:pb-gutter">
+<!-- Hero Card: Active Slice -->
+<section class="relative overflow-hidden bg-surface-container-low border border-outline-variant rounded-xl p-xl verified-glow">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<span class="font-label-sm text-label-sm text-primary uppercase tracking-widest">In Progress</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-xs">Active Slice: API Authentication Flow</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm max-w-xl">
+                            The automated follow-up agent is currently verifying the integrity of the OAuth2 implementation across microservices.
+                        </p>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center gap-xs px-md py-sm bg-surface-container-highest rounded-full border border-outline-variant">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-primary">AGENT_LIVE</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Asymmetric Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Verification Badge & Capability Detail -->
+<div class="lg:col-span-7 flex flex-col gap-lg">
+<!-- Status Section -->
+<div class="bg-surface-container rounded-xl border border-outline-variant p-xl flex items-center gap-xl">
+<div class="w-24 h-24 rounded-full border-4 border-primary/20 flex items-center justify-center flex-shrink-0">
+<div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[48px]" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+</div>
+<div>
+<div class="inline-flex items-center px-md py-xs rounded-full bg-primary/20 text-primary border border-primary/30 mb-sm">
+<span class="font-label-sm text-label-sm font-bold tracking-tight">SLICE VERIFIED</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Verification Confirmed</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">
+                                All automated checks and manual validation steps for this segment are complete.
+                            </p>
+</div>
+</div>
+<!-- Capability Detail -->
+<div class="bg-surface-container-low border border-outline-variant rounded-xl p-md">
+<div class="flex items-center gap-sm mb-md px-sm">
+<span class="material-symbols-outlined text-primary" data-icon="task_alt">task_alt</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Capability Detail</span>
+</div>
+<div class="bg-background rounded-lg p-md border border-outline-variant/50">
+<p class="font-code-md text-code-md text-on-surface">
+<span class="text-primary font-bold">✓</span> Completed one verifiable task: <br/>
+<span class="text-secondary-fixed">Unit tests for OAuth2 handshake.</span>
+</p>
+</div>
+</div>
+</div>
+<!-- Evidence Section (Terminal/Log Style) -->
+<div class="lg:col-span-5 flex flex-col gap-lg">
+<div class="bg-[#060e20] border border-outline-variant rounded-xl overflow-hidden flex flex-col h-full min-h-[300px]">
+<div class="bg-surface-container-highest px-md py-sm flex items-center justify-between border-b border-outline-variant">
+<div class="flex items-center gap-xs">
+<div class="w-2.5 h-2.5 rounded-full bg-error/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-tertiary/40"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-primary/40"></div>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">verification_logs.sh</span>
+</div>
+<div class="p-md font-code-md text-code-md space-y-2 overflow-y-auto">
+<div class="flex gap-md">
+<span class="text-outline">08:14:01</span>
+<span class="text-on-surface-variant">Initializing runner...</span>
+</div>
+<div class="flex gap-md">
+<span class="text-outline">08:14:03</span>
+<span class="text-on-surface-variant">Handshake test sequence [START]</span>
+</div>
+<div class="flex gap-md">
+<span class="text-outline">08:14:05</span>
+<span class="text-on-surface-variant">Validating token expiry...</span>
+</div>
+<div class="flex gap-md">
+<span class="text-outline">08:14:06</span>
+<span class="text-on-surface-variant">Refresh flow simulation...</span>
+</div>
+<div class="pt-md border-t border-outline-variant/30">
+<div class="flex gap-md text-primary">
+<span class="font-bold">Tests passed: 14/14</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<p class="text-on-surface-variant text-[12px] mt-xs">Execution time: 412ms</p>
+<p class="text-on-surface-variant text-[12px]">Coverage: 98.4%</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Area -->
+<div class="flex flex-col md:flex-row items-center justify-center gap-md mt-xl">
+<button class="w-full md:w-auto px-xl h-12 bg-primary text-on-primary font-headline-sm rounded-xl hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-sm">
+                    Proceed to next slice
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="w-full md:w-auto px-xl h-12 bg-transparent border border-outline text-on-surface font-headline-sm rounded-xl hover:bg-surface-container-high active:scale-95 transition-all flex items-center justify-center gap-sm">
+                    View Full Session Logs
+                    <span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="fixed bottom-0 w-full z-50 md:hidden bg-surface-container-lowest border-t border-outline-variant shadow-lg flex justify-around items-center h-16 px-gutter">
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+<span class="font-label-sm text-label-sm">Status</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt" style="font-variation-settings: 'FILL' 1;">list_alt</span>
+<span class="font-label-sm text-label-sm">Queue</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant active:scale-95 transition-transform" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Account</span>
+</a>
+</nav>
+</main>
+<script>
+        // Micro-interaction for logs: simulated real-time cursor
+        const logContent = document.querySelector('.overflow-y-auto');
+        if (logContent) {
+            const cursor = document.createElement('div');
+            cursor.className = 'w-2 h-4 bg-primary inline-block ml-1 animate-pulse align-middle';
+            const lastLine = logContent.lastElementChild;
+            if (lastLine) {
+                lastLine.appendChild(cursor);
+            }
+        }
+
+        // Handle active navigation state changes (visual only for prototype)
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                // In a real app, this would be handled by a router.
+                // Here we just provide a subtle feedback.
+            });
+        });
+    </script>
+</body></html>
