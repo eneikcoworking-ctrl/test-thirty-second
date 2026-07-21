@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "title": "Backend User Authentication and Session Management Endpoints",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When a user wants to access or manage their notes, I want to securely verify their identity and establish an authenticated session, so that notes are kept private and securely isolated per account.",
+      "acceptanceCriteria": "Given a registration request with a unique username and a password, When the request is sent, Then a new user account is successfully created. Given valid credentials, When the user requests login, Then the system returns a secure session token. Given an invalid or expired session token, When attempting to access notes endpoints, Then the server responds with a 401 Unauthorized error.",
+      "reason": "domain-standard expectation: The brief specifies that 'authenticated users can create, edit, delete, and list short notes ... tied to their account', which inherently implies a secure mechanism to authenticate users, register accounts, and manage active sessions on the backend."
+    },
+    {
+      "title": "User Registration, Login, and Session UI",
+      "roleTag": "BARCAN-TAG-11",
+      "jtbd": "When a visitor accesses the Project Notes web interface, I want to present them with login and registration screens, so that they can sign in or create an account to view and manage their personal notes.",
+      "acceptanceCriteria": "Given an unauthenticated visitor, When they load the page, Then they see a login/registration form and cannot access the notes dashboard. Given a logged-in user, When they click 'Logout', Then their session is terminated and they are redirected back to the login screen.",
+      "reason": "domain-standard expectation: To satisfy the brief's requirement of restricting notes management to 'authenticated users', a user-facing authentication flow (including login, registration, and logout controls) is required on the web UI."
+    }
+  ]
+}
