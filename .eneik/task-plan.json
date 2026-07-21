@@ -3,13 +3,13 @@
     {
       "title": "Add CRUD actions to mobile navigation mockup",
       "roleTag": "BARCAN-TAG-03",
-      "jtbd": "When using the mobile view, I want to access create, edit, and delete actions from the bottom navigation bar, so that I can perform core operations directly.",
-      "acceptanceCriteria": "Given the design/approved/20260721003552-mockup/mockup.html file, When viewed in mobile layout, Then the bottom navigation bar includes visual elements for create, edit, and delete actions.\nGiven the updated navigation bar, When interacting with it, Then the search functionality remains prominent alongside the new actions.",
+      "jtbd": "When viewing the mobile layout, I want to see direct create, edit, and delete actions in the bottom navigation bar, so that I can easily access these operations.",
+      "acceptanceCriteria": "Given the file design/approved/20260721003552-mockup/mockup.html, When rendered in a mobile viewport, Then the bottom navigation bar includes visible buttons for create, edit, and delete actions.\nGiven the mobile navigation bar, When the search functionality is active, Then the create, edit, and delete action buttons remain accessible.",
       "leanValue": "essential",
       "kanoClass": "Must-Be",
       "cynefinDomain": "clear",
-      "tocConstraintRef": "mobile-ux-accessibility",
-      "sixSigmaMetric": "Decrease user interaction steps to access CRUD operations on mobile from 3 to 1",
+      "tocConstraintRef": "mobile-navigation-accessibility",
+      "sixSigmaMetric": "Increase the count of visible direct CRUD action buttons on the mobile bottom navigation bar from 0 to 3.",
       "hasUi": true,
       "sourceIndex": 0
     }
