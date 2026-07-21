@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FocusNotes - Search</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .search-highlight {
+            background-color: #dde1ff; /* primary-fixed */
+            color: #001452; /* on-primary-fixed */
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-fixed-dim": "#b7c8e1",
+                      "tertiary": "#3f4f65",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container-lowest": "#ffffff",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed": "#0b1c30",
+                      "on-primary-fixed-variant": "#0038b6",
+                      "surface-container": "#eceef0",
+                      "surface": "#f7f9fb",
+                      "surface-bright": "#f7f9fb",
+                      "on-tertiary": "#ffffff",
+                      "primary-fixed": "#dde1ff",
+                      "outline": "#737688",
+                      "on-background": "#191c1e",
+                      "on-secondary-fixed": "#131b2e",
+                      "surface-variant": "#e0e3e5",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#57677e",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#eff1f3",
+                      "secondary-container": "#dae2fd",
+                      "on-tertiary-fixed-variant": "#38485d",
+                      "on-primary-container": "#dfe3ff",
+                      "primary": "#003ec7",
+                      "surface-container-low": "#f2f4f6",
+                      "background": "#f7f9fb",
+                      "on-secondary": "#ffffff",
+                      "primary-container": "#0052ff",
+                      "secondary": "#565e74",
+                      "surface-container-high": "#e6e8ea",
+                      "on-surface-variant": "#434656",
+                      "on-secondary-fixed-variant": "#3f465c",
+                      "secondary-fixed": "#dae2fd",
+                      "inverse-surface": "#2d3133",
+                      "primary-fixed-dim": "#b7c4ff",
+                      "on-error": "#ffffff",
+                      "inverse-primary": "#b7c4ff",
+                      "tertiary-fixed": "#d3e4fe",
+                      "on-secondary-container": "#5c647a",
+                      "on-primary-fixed": "#001452",
+                      "error": "#ba1a1a",
+                      "secondary-fixed-dim": "#bec6e0",
+                      "on-tertiary-container": "#d6e6ff",
+                      "surface-tint": "#004ced",
+                      "on-surface": "#191c1e",
+                      "outline-variant": "#c3c5d9",
+                      "surface-dim": "#d8dadc"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-gap-lg": "1.5rem",
+                      "stack-gap-md": "1rem",
+                      "container-margin": "1.25rem",
+                      "stack-gap-sm": "0.5rem",
+                      "section-padding": "2rem"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["22px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b border-outline-variant flex justify-between items-center px-container-margin h-14">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary hover:bg-surface-container transition-colors p-2 rounded-full">menu</button>
+<h1 class="text-headline-md font-headline-md font-bold text-primary">FocusNotes</h1>
+</div>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a person with a friendly expression, captured in high-resolution with soft studio lighting. The person has dark hair and is wearing a minimalist navy blue shirt. The background is a clean, out-of-focus modern office space with soft gray and white tones, matching the lightweight productivity brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBx3zlSk6411IN8cJdOM680aMx5BwJOnLJC7E2kcNrbju5CaDgQQeux9G69aJM5v5ruHkvprNNVH8opSqYt4trNXUjOIXFRzpvLSswGW070vrhULNSjLQIflX3qEHQufHt2Jb1Y8bD90goI-uHGLW3fcaoDhBljS68Ud4Eqs68on0X_r7RGFPO-233wOfLiQmzQHpq5fvmfFsF3NsPc6NYAyf0xVXo0yz00Ny-gzVyXmsX1rvESRkqD_uPpbAAWd2i1nYlObqCR-pU"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-14 px-container-margin pt-6 max-w-3xl mx-auto">
+<!-- Search Header -->
+<div class="sticky top-14 bg-background/95 backdrop-blur-sm pt-2 pb-4 z-40">
+<div class="relative flex items-center mb-6">
+<span class="material-symbols-outlined absolute left-4 text-on-surface-variant">search</span>
+<input class="w-full h-12 pl-12 pr-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-body-md placeholder:text-on-surface-variant/50" placeholder="Search your notes..." type="text" value="Design"/>
+<button class="absolute right-4 text-primary font-label-md hover:bg-surface-container transition-colors px-2 py-1 rounded">Clear</button>
+</div>
+<!-- Filter Chips -->
+<div class="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+<button class="flex-shrink-0 px-4 py-2 rounded-full text-label-sm bg-primary text-on-primary transition-all shadow-sm">All</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full text-label-sm bg-surface-container-high text-on-surface-variant hover:bg-outline-variant transition-all border border-outline-variant">Design</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full text-label-sm bg-surface-container-high text-on-surface-variant hover:bg-outline-variant transition-all border border-outline-variant">Development</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full text-label-sm bg-surface-container-high text-on-surface-variant hover:bg-outline-variant transition-all border border-outline-variant">Client Calls</button>
+<button class="flex-shrink-0 px-4 py-2 rounded-full text-label-sm bg-surface-container-high text-on-surface-variant hover:bg-outline-variant transition-all border border-outline-variant">Drafts</button>
+</div>
+</div>
+<!-- Search Results Count -->
+<div class="mb-4">
+<p class="text-label-sm text-on-surface-variant uppercase tracking-wider">3 Results found for "Design"</p>
+</div>
+<!-- Search Results List -->
+<div class="space-y-4">
+<!-- Result 1 -->
+<div class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container-low transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-background group-hover:text-primary transition-colors">
+                        Mobile App <span class="search-highlight">Design</span> System
+                    </h3>
+<span class="text-label-sm text-on-surface-variant">Oct 24</span>
+</div>
+<p class="text-body-md text-on-surface-variant line-clamp-2 leading-relaxed">
+                    Finalizing the visual tokens for the new <span class="search-highlight">design</span> language. We need to ensure that the primary action buttons have sufficient contrast ratios for accessibility.
+                </p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Design</span>
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Priority</span>
+</div>
+</div>
+<!-- Result 2 -->
+<div class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container-low transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-background group-hover:text-primary transition-colors">
+                        Quarterly <span class="search-highlight">Design</span> Review
+                    </h3>
+<span class="text-label-sm text-on-surface-variant">Oct 12</span>
+</div>
+<p class="text-body-md text-on-surface-variant line-clamp-2 leading-relaxed">
+                    The stakeholder feedback on the landing page <span class="search-highlight">design</span> was generally positive. Key takeaway: shorten the onboarding flow to 3 steps.
+                </p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Design</span>
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Archive</span>
+</div>
+</div>
+<!-- Result 3 -->
+<div class="p-5 bg-surface-container-lowest border border-outline-variant rounded-xl hover:bg-surface-container-low transition-all cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<h3 class="font-headline-md text-headline-md text-on-background group-hover:text-primary transition-colors">
+                        Project Echo: <span class="search-highlight">Design</span> Sprint
+                    </h3>
+<span class="text-label-sm text-on-surface-variant">Sep 28</span>
+</div>
+<p class="text-body-md text-on-surface-variant line-clamp-2 leading-relaxed">
+                    Collaborative session with the product team to define the core user journeys. Focus on the 'Focus Mode' <span class="search-highlight">design</span> and notification hierarchy.
+                </p>
+<div class="mt-4 flex gap-2">
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Design</span>
+<span class="px-2 py-1 rounded bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase">Echo</span>
+</div>
+</div>
+</div>
+<!-- Empty State Hint (Hidden by default) -->
+<div class="hidden flex flex-col items-center justify-center py-20 text-center">
+<span class="material-symbols-outlined text-6xl text-outline-variant mb-4">search_off</span>
+<h4 class="font-headline-md text-on-surface">No notes found</h4>
+<p class="text-body-md text-on-surface-variant">Try a different keyword or filter.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center py-2 bg-surface border-t border-outline-variant h-16">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all p-2 rounded-lg">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-sm text-label-sm">Dashboard</span>
+</button>
+<!-- ACTIVE TAB: Search -->
+<button class="flex flex-col items-center justify-center text-primary font-semibold hover:bg-surface-container-low transition-all scale-95 duration-100 p-2 rounded-lg">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="font-label-sm text-label-sm">Search</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all p-2 rounded-lg">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-sm text-label-sm">Projects</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-all p-2 rounded-lg">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction for filter chips
+        const chips = document.querySelectorAll('.flex-shrink-0');
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => {
+                    c.classList.remove('bg-primary', 'text-on-primary');
+                    c.classList.add('bg-surface-container-high', 'text-on-surface-variant');
+                });
+                chip.classList.add('bg-primary', 'text-on-primary');
+                chip.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
+            });
+        });
+
+        // Simple input clear functionality
+        const input = document.querySelector('input');
+        const clearBtn = document.querySelector('.absolute.right-4');
+        clearBtn.addEventListener('click', () => {
+            input.value = '';
+            input.focus();
+        });
+    </script>
+</body></html>
